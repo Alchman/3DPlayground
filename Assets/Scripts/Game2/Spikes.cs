@@ -34,6 +34,11 @@ public class Spikes : MonoBehaviour
             .Append(transform.DOMoveY(maxYValue, moveTime).SetEase(Ease.InExpo))
             .AppendInterval(waitTime/2)
             .SetLoops(-1, LoopType.Yoyo);
+
+        if (moveTime == 0)
+        {
+            Debug.LogWarning("Move time is not set!");
+        }
     }
 
     void PrintUp(string position)
