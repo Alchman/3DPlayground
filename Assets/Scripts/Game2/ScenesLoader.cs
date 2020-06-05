@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+[AddComponentMenu("ScenesLoader")]
 public class ScenesLoader : MonoBehaviour
 {
     #region Singleton

@@ -9,6 +9,9 @@ public class CubeMovement : MonoBehaviour
     [SerializeField] float jumpPower = 1f;
     [SerializeField] float reloadLevelDelay = 1f;
 
+    [Header("Sounds")]
+    [SerializeField] AudioClip deathSound;
+
 
     bool allowInput;
 
@@ -16,7 +19,8 @@ public class CubeMovement : MonoBehaviour
     {
         Destroy(gameObject);
         //TODO spawn particle
-        //TODO play sound
+
+        AudioManager.Instance.PlaySound(deathSound);
 
         ScenesLoader.Instance.RestartLevel(reloadLevelDelay);
     }
@@ -40,24 +44,44 @@ public class CubeMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             //new Vector3(0, 0, 1) = Vector3.forward
-            Vector3 newPosition = transform.position + Vector3.forward;
-            MoveTo(newPosition);
+            MoveForward();
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            Vector3 newPosition = transform.position + Vector3.back;
-            MoveTo(newPosition);
+            MoveBack();
         }
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            Vector3 newPosition = transform.position + Vector3.left;
-            MoveTo(newPosition);
+            MoveLeft();
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            Vector3 newPosition = transform.position + Vector3.right;
-            MoveTo(newPosition);
+            MoveRight();
         }
+    }
+
+    public void MoveRight()
+    {
+        Vector3 newPosition = transform.position + Vector3.right;
+        MoveTo(newPosition);
+    }
+
+    public void MoveLeft()
+    {
+        Vector3 newPosition = transform.position + Vector3.left;
+        MoveTo(newPosition);
+    }
+
+    public void MoveBack()
+    {
+        Vector3 newPosition = transform.position + Vector3.back;
+        MoveTo(newPosition);
+    }
+
+    public void MoveForward()
+    {
+        Vector3 newPosition = transform.position + Vector3.forward;
+        MoveTo(newPosition);
     }
 
     void MoveTo(Vector3 newPosition)
